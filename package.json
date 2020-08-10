@@ -1,0 +1,43 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "solo project to do list",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development webpack-dev-server --open & nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geewailee/solo.git"
+  },
+  "author": "Garrett Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geewailee/solo/issues"
+  },
+  "homepage": "https://github.com/geewailee/solo#readme",
+  "dependencies": {
+    "browserify": "^10.2.4",
+    "express": "^4.12.3",
+    "prop-types": "^15.6.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "@babel/preset-react": "^7.10.1",
+    "babel-loader": "^8.1.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^3.6.0",
+    "nodemon": "^2.0.4",
+    "sass": "^1.26.9",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
