@@ -1,17 +1,4 @@
-# Soolo Project To Do List
+# Reinforcement Project
 
-# Goal
+# npm run build before running app
 
-    Create a CRUD To Do list
-    Setup Build
-    Authentication
-    SQL Database
-
-# MVP
-
-    Login
-    List Works
-
-# Stretch
-
-    Connect to Google Drive
