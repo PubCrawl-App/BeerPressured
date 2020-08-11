@@ -60,7 +60,7 @@ app.get('/crawls/:crawls_id', crawlsController.getDetails, (req, res) => {
   return res.status(200).json(res.locals.details)
 })
 
-app.post('/create', crawlsController.postCrawl, (req, res) => {
+app.post('/create', crawlsController.createCrawl, (req, res) => {
   return res.status(200).json(res.locals.post)
 })
 
