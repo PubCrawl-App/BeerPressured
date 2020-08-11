@@ -40,7 +40,7 @@ map: /map
 app.use("/build", express.static(path.join(__dirname, "../build")));
 
 app.post('/createUser', userController.createUser, authController.setCookie, (req, res) => {
-  return res.status(200).json(res.locals.post)
+  return res.status(200).json(res.locals)
 })
 
 app.post('/login', userController.verifyUser, authController.setCookie, (req, res) => {
@@ -48,15 +48,15 @@ app.post('/login', userController.verifyUser, authController.setCookie, (req, re
 })
 
 //res.locals.feeling & res.locals.userCrawls
-app.get('/:users_id', userController.getProfile, crawlsController.getUserCrawls, (req, res) => {
+app.get('/users/:users_id', userController.getProfile, crawlsController.getUserCrawls, (req, res) => {
   return res.status(200).json(res.locals)
 })
 
-app.get('/home', crawlsController.getCrawls, (req, res) => {
+app.get('/home', crawlsController.getAllCrawls, (req, res) => {
   return res.status(200).json(res.locals.crawls)
 })
 
-app.get('/:crawls_id', crawlsController.getDetails, (req, res) => {
+app.get('/crawls/:crawls_id', crawlsController.getDetails, (req, res) => {
   return res.status(200).json(res.locals.details)
 })
 

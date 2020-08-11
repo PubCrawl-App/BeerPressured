@@ -1,10 +1,7 @@
 const authController = {};
 
 authController.setCookie = (req, res, next) => {
-  const {username, password} = req.body;
-  console.log(`password ${password}`);
-
-  res.cookie("pass", Math.random());
+  const {username } = req.body;
   res.cookie(username, { expires: new Date(Date.now() + 900000), httpOnly: true })
   res.send("cookie sent");
   return next();
