@@ -1,0 +1,74 @@
+@import "/variables";
+
+/* media queries */
+@media (max-width: 500px) and (max-height: 730px) {
+    * {
+      background-color: rgb(255, 253, 253);
+      text-align: center;
+    }
+  }
+
+h1 {
+    font-family: $header-font-family;
+    color: $blue;
+}
+
+p {
+      font-family: $text-font-family
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: $blue;
+  height: 60px;
+  width: 100%;
+}
+
+.nav-btn {
+  font: $header-font-family;
+  color: $blue;
+  background-color: white;
+  text-decoration: none;
+  text-align: center;
+  padding: 1rem;
+  border: none;
+  border-radius: $border-radius;
+  font-size: 12px;
+  width: 40px;
+  height: 10px;
+}
+
+.nav-btn:hover {
+  background-color: rgba(255, 255, 255, 0.803);
+}
+
+
+.btn {
+  color: white;
+  background-color: $blue;
+  text-decoration: none;
+  padding: 1rem;
+  border: none;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: $blue-hover;
+}
+
+.google {
+  width: 35%;
+  padding: 3px;
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
+  border-radius: 3px;
+  border: $blue solid 1px;
+  width: 40%;
+  margin: auto;
+}
