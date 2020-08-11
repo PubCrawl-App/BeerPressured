@@ -39,12 +39,17 @@ map: /map
 
 app.use("/build", express.static(path.join(__dirname, "../build")));
 
-app.post('/login', userController.verifyUser, (req, res) => {
+app.post('/createUser', userController.createUser, authController.setCookie, (req, res) => {
+  return res.status(200).json(res.locals.post)
+})
+
+app.post('/login', userController.verifyUser, authController.setCookie, (req, res) => {
   return res.status(200).json(res.locals.user);
 })
 
-app.get('/:users_id', userController.getProfile, (req, res) => {
-  return res.status(200).json(res.locals.id)
+//res.locals.feeling & res.locals.userCrawls
+app.get('/:users_id', userController.getProfile, crawlsController.getUserCrawls, (req, res) => {
+  return res.status(200).json(res.locals)
 })
 
 app.get('/home', crawlsController.getCrawls, (req, res) => {

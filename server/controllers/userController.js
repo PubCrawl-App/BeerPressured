@@ -10,6 +10,25 @@ const userController = {}
  
 // TODO: create users
 
+userController.createUser = (req, res, next) => {
+  let {
+    email, 
+    username,
+    password
+  } = req.body;
+  const createUserQuery = `INSERT INTO users (email, username, password) VALUE (${email}, ${username}, ${password}, )`;
+
+  db.query(createUserQuery).then(data => {
+   res.locals.user = data.rows.username;
+   return next();
+  })
+  .catch(err => {
+    next({ 
+        log: `error found in receiving data ${err}`
+    })
+  })
+}
+
 userController.verifyUser = (req, res, next) => {
   let {
     email, 
@@ -30,18 +49,17 @@ userController.verifyUser = (req, res, next) => {
 
 userController.getProfile = (req, res, next) => {
     let {
-      username
-    } = req.body;
+      id
+    } = req.params;
 
     // users: username, feeling
-    // all events that match user_id 
-    // 
+    
 
-    const profileQuery = ``;
+    const profileQuery = `SELECT feeling FROM Users WHERE id = '${id}'`;
   
     db.query(profileQuery).then(data => {
      
-        res.locals.user = data.rows.username;
+    res.locals.feeling = data.rows.feeling;
      return next();
     })
     .catch(err => {
@@ -50,7 +68,6 @@ userController.getProfile = (req, res, next) => {
       })
     })
   }
-
 
   //create users
 module.exports = userController;
