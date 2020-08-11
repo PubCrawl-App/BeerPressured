@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
+import CrawlDetail from './CrawlDetail';
+import CreateCrawl from "./CreateCrawl";
+import Profile from './Profile';
 
 //import './App.scss'
 
@@ -21,10 +24,11 @@ const App = () => {
     //   </Switch>
     // </BrowserRouter>
     <div>
-      {/* <h1>hello world</h1>
-      <p>Lorem ispum, something something something; ...etc.</p> */}
-      <Login />
+      {/* <Login /> */}
       {/* <Home /> */}
+      {/* <CrawlDetail /> */}
+      {/* <CreateCrawl /> */}
+      <Profile />
     </div>
   );
 };
