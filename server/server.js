@@ -37,8 +37,12 @@ map: /map
 
 app.use("/build", express.static(path.join(__dirname, "../build")));
 
-app.post('/login', userController.login, (req, res) => {
+app.post('/login', userController.verifyUser, (req, res) => {
   return res.status(200).json(res.locals.user);
+})
+
+app.get('/:users_id', userController.getProfile, (req, res) => {
+  return res.status(200).json(res.locals.id)
 })
 
 app.get('/home', crawlsController.getCrawls, (req, res) => {
@@ -51,11 +55,6 @@ app.get('/:crawls_id', crawlsController.getDetails, (req, res) => {
 
 app.post('/create', crawlsController.postCrawl, (req, res) => {
   return res.status(200).json(res.locals.post)
-})
-
-
-app.get('/:users_id', userController.getProfile, (req, res) => {
-  return res.status(200).json(res.locals.id)
 })
 
 app.get('/map', crawlsController.getMap, (req, res) => {
