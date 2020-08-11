@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const userController = require("./controllers/userController.js");
 const crawlsController = require("./controllers/crawlsController.js");
+const authController = require("./controllers/authController.js");
 const cookieParser = require("cookie-parser");
 
 app.use(express.json());
