@@ -25,6 +25,8 @@ async function getAccessToken(code) {
   return params.get("access_token");
 }
 
+// after user verification, send cookie
+
 /* 
 login : /login
 oauth: /auth/user
