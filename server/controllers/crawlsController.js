@@ -82,7 +82,7 @@ crawlsController.createCrawl = (req, res, next) => {
 
     // INSERT INTO crawls (crawlName, location, details, schedule, dateTime) VALUES ('name', 'midtown', 'details', 'sched', 'date');
     
-  const createCrawlQuery = `INSERT INTO crawls (crawlname, startinglocation, details, schedule, datetime, lat, lon) VALUES ('${crawlname}', '${startinglocation}', '${details}', '${schedule}', '${datetime}', '${lat}', '${lon}',);`;
+  const createCrawlQuery = `INSERT INTO crawls (crawlname, startinglocation, details, schedule, datetime, lat, lon) VALUES ('${crawlname}', '${startinglocation}', '${details}', '${schedule}', '${datetime}', '${lat}', '${lon}');`;
 
   console.log("req body", req.body)
 
