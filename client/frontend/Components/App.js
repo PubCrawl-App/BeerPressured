@@ -35,13 +35,13 @@ const App = () => {
           <Route exact path='/'>
             {loggedIn ? <Redirect to='/home' /> : <Redirect to='/signin' />}
           </Route>
-          <Route exact path='/signin'>
+          <Route path='/signin'>
             <Login />
           </Route>
-          <Route exact path='/createHome'>
+          <Route path='/createHome'>
             <CreateCrawl />
           </Route>
-          <Route exact path='/home'>
+          <Route path='/home'>
             <Home />
           </Route>
         </Switch>
