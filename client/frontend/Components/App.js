@@ -30,7 +30,7 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-        {/* <NavBar /> */}
+        { loggedIn && <NavBar />}
         <Switch>
           <Route exact path='/'>
             {loggedIn ? <Redirect to='/home' /> : <Redirect to='/signin' />}
@@ -38,11 +38,17 @@ const App = () => {
           <Route exact path='/signin'>
             <Login />
           </Route>
-          <Route exact path='/createHome'>
+          <Route exact path='/createCrawl'>
             <CreateCrawl />
           </Route>
           <Route exact path='/home'>
             <Home />
+          </Route>
+          <Route exact path='/map'>
+            <GoogleMap location={ location }/>
+          </Route>
+          <Route exact path='/profile'>
+            <Profile />
           </Route>
         </Switch>
       </BrowserRouter>

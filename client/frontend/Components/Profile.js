@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { userData, data } from '../Mock';
-import NavBar from './NavBar';
 
 const Profile = () => {
   const [val, setVal] = useState(userData.feeling)
@@ -18,7 +17,6 @@ const Profile = () => {
 
   return (
     <div>
-      <NavBar />
       <h1>Name</h1>
       <p>{userData.name}</p>
       <h1>About Me</h1>

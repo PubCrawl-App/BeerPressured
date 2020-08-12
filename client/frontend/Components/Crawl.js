@@ -1,13 +1,13 @@
 import React from 'react';
 
 const Crawl = (props) => {
-  const { name, time, location, created_by } = props.data;
+  // const { name, time, location, created_by } = props.data;
+  const { crawlname, datetime, startinglocation } = props.data
   return (
-    <div>
-      <h1>{name}</h1>
-      <p>{time}</p>
-      <p>{location}</p>
-      <p>{created_by}</p>
+    <div className='crawl-container'>
+      <p>{crawlname}</p>
+      <p>{datetime}</p>
+      <p>{startinglocation}</p>
     </div>
   )
 }

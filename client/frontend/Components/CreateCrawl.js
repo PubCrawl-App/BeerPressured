@@ -1,12 +1,10 @@
 import React from 'react';
-import NavBar from './NavBar';
 import GoogleCoordinates from './GoogleCoordinates';
 const CreateCrawl = () => {
   //make sure on submit post request to database
 
   return (
     <div>
-      <NavBar />
       <form>
         <label>Name: </label>
         <input name='Name'></input><br></br>
