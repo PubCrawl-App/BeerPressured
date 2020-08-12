@@ -42,14 +42,17 @@ crawlsController.getDetails = (req, res, next) => {
   let {
     crawls_id
   } = req.params;
-//console.log('req.params' , req.params)
+  //console.log('req.params' , req.params)
   const crawlDetailsQuery = `SELECT * FROM crawls LEFT JOIN events ON crawls.id = events.crawls_id WHERE crawls_id = '${crawls_id}';`;
   
   db.query(crawlDetailsQuery).then(data => {
-      res.locals.userCrawls = data.rows;
-      console.log(res.locals)
-    })
-    
+    res.locals.userCrawls = data.rows;
+    console.log(res.locals)
+    return next();
+  })
+}
+crawlsController.getAttendees = (req, res, next) => {
+  let { crawls_id } = req.params;
     const attendeesQuery = `SELECT events.users_id, username FROM events  LEFT JOIN users ON events.users_id = users.id WHERE events.crawls_id = '${crawls_id}';`;
 
   db.query(attendeesQuery).then(data => {

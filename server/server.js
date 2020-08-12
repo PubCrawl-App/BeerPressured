@@ -75,7 +75,7 @@ app.get('/home', crawlsController.getAllCrawls, (req, res) => {
 })
 
 //good
-app.get('/crawls/:crawls_id', crawlsController.getDetails, (req, res) => {
+app.get('/crawls/:crawls_id', crawlsController.getDetails, crawlsController.getAttendees, (req, res) => {
   console.log(res);
   return res.status(200).json(res.locals)
 })
