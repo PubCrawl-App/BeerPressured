@@ -9,8 +9,8 @@ module.exports = {
     path: path.resolve(__dirname, "build"),
   },
   devServer: {
-    port: 8080,
-    historyApiFallback: true, 
+    // port: 8080,
+    // historyApiFallback: true, 
     publicPath: "/build",
     proxy: {
       '/': 'http://localhost:3000/'
