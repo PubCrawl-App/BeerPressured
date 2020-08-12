@@ -25,7 +25,7 @@ const location = {
 const App = () => {
   // verify users
   // const loggedIn = document.cookie.split(';').some((item) => item.trim().startsWith('token='));
-  const loggedIn = true;
+  const loggedIn = false;
 
   return (
     <div>
