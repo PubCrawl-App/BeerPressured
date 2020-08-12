@@ -9,13 +9,11 @@ module.exports = {
     path: path.resolve(__dirname, "build"),
   },
   devServer: {
-    // publicPath: "http://localhost:8080/assets/bundle.js",
-    // publicPath: "http://localhost:8080/build/",
+    port: 8080,
+    historyApiFallback: true, 
     publicPath: "/build",
     proxy: {
-      "/api": {
-        target: "http://localhost:3000/",
-      },
+      '/': 'http://localhost:3000/'
     },
   },
   module: {
