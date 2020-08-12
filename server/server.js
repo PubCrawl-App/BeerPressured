@@ -5,6 +5,7 @@ const userController = require("./controllers/userController.js");
 const crawlsController = require("./controllers/crawlsController.js");
 const authController = require("./controllers/authController.js");
 const cookieParser = require("cookie-parser");
+const {OAuth2Client} = require('google-auth-library');
 
 // async function getAccessToken(code) {
 //   const res = await fetch(" google's access token ", {
@@ -25,6 +26,8 @@ const cookieParser = require("cookie-parser");
 
 // after user verification, send cookie
 
+
+
 /* 
 login : /login
 oauth: /auth/user
@@ -34,6 +37,24 @@ create crawl: /create
 profile: /:users_id
 map: /map
 */
+const client = new OAuth2Client('1056890442611-8hj0b6phoo8k6kpd0a532gc1f63sq4eo.apps.googleusercontent.com');
+
+async function verify() {
+  const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: '1056890442611-8hj0b6phoo8k6kpd0a532gc1f63sq4eo.apps.googleusercontent.com',  
+      // Specify the CLIENT_ID of the app that accesses the backend
+      // Or, if multiple clients access the backend:
+      //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+  });
+  const payload = ticket.getPayload();
+  const userid = payload['sub'];
+  console.log('userid: ', userid)
+  // If request specified a G Suite domain:
+  // const domain = payload['hd'];
+}
+
+
 
 app.use("/build", express.static(path.join(__dirname, "../build")));
 
@@ -42,6 +63,12 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
+
+app.get('/tokensignin', (req, res) => {
+  verify().catch(console.error);
+  return res.status(200).send(res.locals)
+})
+
 
 // create crawl page
 app.get('/create', (req, res) => {
@@ -91,7 +118,7 @@ app.get('/crawls/:crawls_id', crawlsController.getDetails, crawlsController.getA
 })
 
 //
-// app.post('/createCrawl', crawlsController.createCrawl, (req, res) => {
+// app.post('/tokenSignIn', (req, res) => {
 //   return res.status(200).json(res.locals)
 // })
 
