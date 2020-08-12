@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { NavLink, BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
 import CrawlDetail from './CrawlDetail';
@@ -8,6 +8,7 @@ import Profile from './Profile';
 import GoogleCoordinates from "./GoogleCoordinates";
 import GoogleMap from './Map';
 import CreateAccount from './CreateAccount';
+import NavBar from './Navbar'
 
 
 //import './App.scss'
@@ -24,29 +25,28 @@ const location = {
 const App = () => {
   // verify users
   // const loggedIn = document.cookie.split(';').some((item) => item.trim().startsWith('token='));
+  const loggedIn = true;
 
   return (
-    // <BrowserRouter>
-    //   <Switch>
-    //     <Route exact path='/'>
-    //       {loggedIn ? <Home /> : <Redirect to='/signin' />}
-    //     </Route>
-    //     <Route exact path='/signin'>
-    //       <Login />
-    //     </Route>
-    //   </Switch>
-    // </BrowserRouter>
     <div>
-      {/* <Login /> */}
-      {/* <CreateAccount /> */}
-      {/* <Home /> */}
-      {/* <CrawlDetail /> */}
-      <CreateCrawl />
-      {/* <Profile /> */}
-      {/* <GoogleCoordinates /> */}
-      {/* <GoogleMap location={location}/> */}
+      <BrowserRouter>
+        {/* <NavBar /> */}
+        <Switch>
+          <Route exact path='/'>
+            {loggedIn ? <Redirect to='/home' /> : <Redirect to='/signin' />}
+          </Route>
+          <Route exact path='/signin'>
+            <Login />
+          </Route>
+          <Route exact path='/createHome'>
+            <CreateCrawl />
+          </Route>
+          <Route exact path='/home'>
+            <Home />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
-
   );
 };
 export default App;

@@ -43,6 +43,11 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
+// create crawl page
+app.get('/create', (req, res) => {
+  return res.status(200).redirect('/')
+})
+
 //GOOD
 app.post('/createCrawl', crawlsController.createCrawl, (req, res) => {
   return res.status(200).json(res.locals)
@@ -69,9 +74,14 @@ app.get('/users/:users_id', userController.getProfile, crawlsController.getUserC
 })
 
 //good
+// app.get('/home', crawlsController.getAllCrawls, (req, res) => {
+//   console.log(res.locals.crawls)
+//   return res.status(200).json(res.locals.crawls);
+// })
+
 app.get('/home', crawlsController.getAllCrawls, (req, res) => {
   console.log(res.locals.crawls)
-  return res.status(200).json(res.locals.crawls)
+  return res.status(200).json(res.locals.crawls);
 })
 
 //good
@@ -90,7 +100,7 @@ app.get('/crawls/:crawls_id', crawlsController.getDetails, crawlsController.getA
 //   //how do we get this mappppp???
 // })
 
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../index.html"));
 });
 
