@@ -16,10 +16,11 @@ userController.createUser = (req, res, next) => {
     username,
     password
   } = req.body;
-  const createUserQuery = `INSERT INTO users (email, username, password) VALUE (${email}, ${username}, ${password}, )`;
+  console.log("req body", req.body)
+//   const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}')`;
+  const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}')`;
 
   db.query(createUserQuery).then(data => {
-   res.locals.user = data.rows.username;
    return next();
   })
   .catch(err => {
@@ -37,8 +38,15 @@ userController.verifyUser = (req, res, next) => {
   const userQuery = `SELECT * FROM users WHERE email='${email}' AND password='${password}'`;
 
   db.query(userQuery).then(data => {
-   res.locals.user = data.rows.username;
-   return next();
+    // if no data
+    // throw new Error('theres no data')
+    if (!data.rows.length) {
+      res.locals.data = false;
+        //return next(new Error('error: no user found'));
+    }
+      res.locals.user = data.rows;
+      console.log("data.rows in verify", data.rows)
+      return next();
   })
   .catch(err => {
     next({ 
@@ -49,17 +57,14 @@ userController.verifyUser = (req, res, next) => {
 
 userController.getProfile = (req, res, next) => {
     let {
-      id
+      users_id
     } = req.params;
-
-    // users: username, feeling
-    
-
-    const profileQuery = `SELECT feeling FROM Users WHERE id = '${id}'`;
+    console.log('params: ', req.params)
+    const profileQuery = `SELECT feeling FROM users WHERE id = '${users_id}'`;
   
     db.query(profileQuery).then(data => {
-     
-    res.locals.feeling = data.rows.feeling;
+    console.log('data.rows ', data.rows);
+    res.locals.feeling = data.rows;
      return next();
     })
     .catch(err => {

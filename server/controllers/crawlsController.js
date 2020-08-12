@@ -4,10 +4,10 @@ const crawlsController = {}
 crawlsController.getAllCrawls = (req, res, next) => {
 
   const allCrawlsQuery = `SELECT * FROM crawls`;
-
+  //console.log('req.params' , req.params)
   db.query(allCrawlsQuery).then(data => {
-  
-  res.locals.crawls = data.rows.crawls;
+  //console.log('data.rows ', data.rows);
+  res.locals.crawls = data.rows;
   return next();
   })
   .catch(err => {
@@ -18,16 +18,16 @@ crawlsController.getAllCrawls = (req, res, next) => {
 }
 
 crawlsController.getUserCrawls = (req, res, next) => {
-  console.log('req.params' , req.params)
+  //console.log('req.params' , req.params)
   let {
-    id
+    users_id
   } = req.params;
-
-  const crawlsQuery = `SELECT crawls_id, crawlName, location, dateTime FROM crawls LEFT JOIN events ON crawls.id = events.crawls_id WHERE users_id = ${id};`;
+//console.log('users_id', users_id)
+  const crawlsQuery = `SELECT crawls_id, crawlName, location, dateTime FROM crawls LEFT JOIN events ON crawls.id = events.crawls_id WHERE users_id = ${users_id};`;
 
   db.query(crawlsQuery).then(data => {
   
-  res.locals.userCrawls = data.rows.userCrawls;
+  res.locals.userCrawls = data.rows;
   return next();
   })
   .catch(err => {
@@ -40,21 +40,22 @@ crawlsController.getUserCrawls = (req, res, next) => {
 crawlsController.getDetails = (req, res, next) => {
   console.log('req.params' , req.params)
   let {
-    id
+    crawls_id
   } = req.params;
-
-  const crawlDetailsQuery = `SELECT * FROM crawls LEFT JOIN events ON crawls.id = events.crawls_id WHERE crawls_id = '${id}';`;
+//console.log('req.params' , req.params)
+  const crawlDetailsQuery = `SELECT * FROM crawls LEFT JOIN events ON crawls.id = events.crawls_id WHERE crawls_id = '${crawls_id}';`;
   
-  db.query(detailQuery).then(data => {
-      
-      res.locals.userCrawls = data.rows.userCrawls;
+  db.query(crawlDetailsQuery).then(data => {
+      res.locals.userCrawls = data.rows;
+      console.log(res.locals)
     })
     
-    const attendeesQuery = `SELECT events.users_id, username FROM events  LEFT JOIN users ON events.users_id = users.id WHERE events.crawls_id = ${id};`;
+    const attendeesQuery = `SELECT events.users_id, username FROM events  LEFT JOIN users ON events.users_id = users.id WHERE events.crawls_id = '${crawls_id}';`;
 
   db.query(attendeesQuery).then(data => {
   
-  res.locals.attendees = data.rows.usernames;
+  res.locals.attendees = data.rows;
+  console.log(res.locals.attendees);
   return next();
     })
   .catch(err => {
@@ -66,12 +67,21 @@ crawlsController.getDetails = (req, res, next) => {
 
 crawlsController.createCrawl = (req, res, next) => {
 
-    let { crawlName, location, details, schedule, dateTime } = req.body;
+    let { 
+      crawlname, 
+      location, 
+      details, 
+      schedule, 
+      datetime } = req.body;
     
-    const createCrawlQuery = `INSERT INTO users (crawlName, location, details, schedule, dateTime) VALUE (${crawlName}, ${location}, ${details}, ${schedule}, ${dateTime} )`;
+
+    // INSERT INTO crawls (crawlName, location, details, schedule, dateTime) VALUES ('name', 'midtown', 'details', 'sched', 'date');
+    
+  const createCrawlQuery = `INSERT INTO crawls (crawlname, location, details, schedule, datetime) VALUES ('${crawlname}', '${location}', '${details}', '${schedule}', '${datetime}');`;
+
+  console.log("req body", req.body)
 
   db.query(createCrawlQuery).then(data => {
-   res.locals.newCrawl = data.rows;
    return next();
   })
   .catch(err => {
@@ -80,4 +90,27 @@ crawlsController.createCrawl = (req, res, next) => {
     })
   })
 }
+
+
+// crawlsController.createCrawl = (req, res, next) => {
+//     let { 
+//         crawlName, 
+//         location, 
+//         details, 
+//         schedule, 
+//         dateTime } = req.body;
+      
+//   //   const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}')`;
+//     const createCrawlQuery = `INSERT INTO crawls (crawlname, location, details, schedule, datetime) VALUES ('${crawlName}', '${location}', '${details}', '${schedule}', '${dateTime}');`;
+  
+//     db.query(createCrawlQuery).then(data => {
+//      return next();
+//     })
+//     .catch(err => {
+//       next({ 
+//           log: `error found in receiving data ${err}`
+//       })
+//     })
+//   }
+
 module.exports = crawlsController;
