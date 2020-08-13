@@ -1,10 +1,14 @@
 const authController = {};
 
 authController.setCookie = (req, res, next) => {
-  const { email } = req.body;
-  if (res.locals.data === true) {
-    res.cookie('key', email, { expires: new Date(Date.now() + 900000) });
-  }
+  console.log('req.body ', req.body);
+  const { id } = res.locals;
+
+  console.log('res.locals.data ', res.locals.data);
+  console.log('res.locals', res.locals);
+  //if (res.locals.data === undefined) {
+  res.cookie('key', id, { expires: new Date(Date.now() + 900000) });
+  // }
   return next();
 };
 
