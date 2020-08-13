@@ -19,7 +19,6 @@ const CreateAccount = () => {
       },
       body: JSON.stringify(temp),
     })
-      .then((res) => res.json())
       .then((res) => console.log('response from post', res));
   };
 
