@@ -20,14 +20,11 @@ const Login = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(temp),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log('response from post', res);
-        setEmail('');
-        setPassword('');
-        location.reload();
-      });
+    }).then(() => {
+      setEmail('');
+      setPassword('');
+      location.reload();
+    });
   };
 
   return (

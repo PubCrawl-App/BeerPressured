@@ -14,11 +14,67 @@ userController.createUser = (req, res, next) => {
   let { email, username, password } = req.body;
   console.log('req body', req.body);
   //   const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}')`;
-  const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}') RETURNING id`;
+  const createUserQuery = `INSERT INTO users (email, username, password, feeling) VALUES ('${email}', '${username}', '${password}', '5') RETURNING id`;
 
   db.query(createUserQuery)
     .then((data) => {
-      res.locals.user = data.rows;
+      console.log('data.rows[0] ', data.rows[0]);
+      console.log('data.rows[0].id ', data.rows[0].id);
+      console.log('res.locals ', res.locals);
+      res.locals = data.rows[0];
+      return next();
+    })
+    .catch((err) => {
+      next({
+        log: `error found in receiving data ${err}`,
+      });
+    });
+};
+userController.createOauthUser = (req, res, next) => {
+  const { email } = req.body;
+  console.log('req body', req.body);
+  //   const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}')`;
+  const createUserQuery = `INSERT INTO users (email, password, feeling) VALUES ('${email}', '0000', 5) RETURNING id`;
+
+  if (res.locals.data === false) {
+    db.query(createUserQuery)
+      .then((data) => {
+        console.log('data.rows[0] ', data.rows[0]);
+        console.log('data.rows[0].id ', data.rows[0].id);
+        console.log('res.locals ', res.locals);
+        res.locals.id = data.rows[0].id;
+        return next();
+      })
+      .catch((err) => {
+        next({
+          log: `error found in receiving data ${err}`,
+        });
+      });
+    return next();
+  }
+};
+
+userController.oauthCheck = (req, res, next) => {
+  let { email } = req.body;
+  console.log('oauthCheck ');
+  const oauthQuery = `SELECT id FROM users WHERE email='${email}'`;
+
+  db.query(oauthQuery)
+    .then((data) => {
+      // throw new Error('theres no data')
+      // console.log('data.rows ', data.rows);
+
+      //if the email doesn't exist, create new User
+      if (data.rows[0].id === undefined) {
+        res.locals.data = false;
+        return next();
+      }
+      //if the email does exist, set cookie
+      res.locals.data = true;
+      console.log('data.rows ', data.rows);
+      console.log('data.rows in verify', data.rows[0]);
+      res.locals = data.rows[0];
+      console.log('res.locals in oauth check', res.locals);
       return next();
     })
     .catch((err) => {
@@ -30,20 +86,22 @@ userController.createUser = (req, res, next) => {
 
 userController.verifyUser = (req, res, next) => {
   let { email, password } = req.body;
-  const userQuery = `SELECT * FROM users WHERE email='${email}' AND password='${password}'`;
+  const userQuery = `SELECT id FROM users WHERE email='${email}' AND password='${password}'`;
 
   db.query(userQuery)
     .then((data) => {
       // if no data
       // throw new Error('theres no data')
+      console.log('data.rows ', data.rows);
       if (!data.rows.length) {
         res.locals.data = false;
 
         //return next(new Error('error: no user found'));
       }
       res.locals.data = true;
-      res.locals.user = data.rows;
-      console.log('data.rows in verify', data.rows);
+      console.log('data.rows ', data.rows);
+      console.log('data.rows in verify', data.rows[0]);
+      res.locals = data.rows[0];
       return next();
     })
     .catch((err) => {
