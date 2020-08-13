@@ -83,17 +83,15 @@ app.post('/createUser', userController.createUser, authController.setCookie, (re
   return res.status(200).json(res.locals.user).redirect('/home');
 });
 //GOOD
-// app.post('/login', userController.verifyUser, authController.setCookie, (req, res) => {
-//   // if (res.locals.data === true) {
-//   //   // return res.status(200).json(res.locals.user);
-//   //   return res.status(200).redirect('/');
-//   // }
-//   // return res.status(400).json(res.locals.data);
-//   // // .redirect('/createUser');
-//   res.status(200).redirect('/');
-// });
-
-app.use('/login', loginRouter);
+app.post('/login', userController.verifyUser, authController.setCookie, (req, res) => {
+  if (res.locals.data === true) {
+    return res.status(200).json(res.locals.user);
+    // return res.status(200).redirect('/');
+  }
+  return res.status(400).json(res.locals.data);
+  // .redirect('/createUser');
+  res.status(200).redirect('/');
+});
 
 //good
 app.get(
