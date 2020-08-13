@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 
 const CreateAccount = () => {
@@ -22,10 +23,17 @@ const CreateAccount = () => {
       .then((res) => res.json())
       .then((res) => console.log('response from post', res));
   };
+=======
+import React from 'react';
+
+const CreateAccount = () => {
+  //post request to database
+>>>>>>> 5fedc8841fba74d49517ba3e49c57bb76acd1749
 
   return (
     <div>
       <h1>Create your account!</h1>
+<<<<<<< HEAD
       <form onSubmit={createUser}>
         <p>Username: </p>
         <input
@@ -51,6 +59,22 @@ const CreateAccount = () => {
         <br />
         <input type="submit" value="Create User" />
         <br />
+=======
+      <form>
+        <label for="uname">Username:</label>
+        <br></br>
+        <input type="text" id="uname" name="uname" />
+        <br></br>
+        <label for="email">Email:</label>
+        <br></br>
+        <input type="text" id="email" name="email" />
+        <br></br>
+        <label for="pass">Password:</label>
+        <br></br>
+        <input type="text" id="pass" name="pass" />
+        <br></br>
+        <input type="submit" value="Create Account"></input>
+>>>>>>> 5fedc8841fba74d49517ba3e49c57bb76acd1749
       </form>
     </div>
   );
