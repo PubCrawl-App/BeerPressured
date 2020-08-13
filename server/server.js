@@ -77,6 +77,16 @@ app.post('/createCrawl', crawlsController.createCrawl, (req, res) => {
   return res.status(200).json(res.locals);
 });
 
+//
+app.post(
+  '/oauthUserAuth',
+  userController.oauthCheck,
+  userController.createOauthUser,
+  authController.setCookie,
+  (req, res) => {
+    return res.status(200).json(res.locals.user).redirect('/home');
+  }
+);
 //GOOD
 app.post('/createUser', userController.createUser, authController.setCookie, (req, res) => {
   return res.status(200).json(res.locals.user).redirect('/home');
