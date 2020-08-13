@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   function onSignIn(googleUser) {
     var id_token = googleUser.getAuthResponse().id_token;
     var xhr = new XMLHttpRequest();
@@ -12,19 +16,46 @@ const Login = () => {
     xhr.send('idtoken=' + id_token);
   }
 
+  const userLogin = (e) => {
+    e.preventDefault();
+    const temp = {
+      email,
+      password,
+    };
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(temp),
+    })
+      .then((res) => res.json())
+      .then((res) => console.log('response from post', res));
+  };
+
   return (
     <div>
       <h1>SIGN IN TO PUBCRAWL</h1>
-      <form>
+      <form onSubmit={userLogin}>
         <p>Email: </p>
-        <input type="text" placeholder="Email"></input>
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <p>Password: </p>
-        <input type="text" placeholder="Password"></input>
-        <br></br>
-        <input type="submit" value="Sign In"></input>
-        <br></br>
-        <input type="submit" value="Create Account"></input>
+        <input
+          type="text"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <br />
+        <input type="submit" value="Sign In" />
+        <br />
       </form>
+      <NavLink to="/createAcc"> CREATE ACCOUNT</NavLink>
       <p>Or Sign in with Google!</p>
       <div className="g-signin2" data-onsuccess="onSignIn"></div>
       {/* <div className='login-button'>

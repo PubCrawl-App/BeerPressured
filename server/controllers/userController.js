@@ -14,10 +14,11 @@ userController.createUser = (req, res, next) => {
   let { email, username, password } = req.body;
   console.log('req body', req.body);
   //   const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}')`;
-  const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}')`;
+  const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}') RETURNING id`;
 
   db.query(createUserQuery)
     .then((data) => {
+      res.locals.user = data.rows;
       return next();
     })
     .catch((err) => {

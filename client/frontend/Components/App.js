@@ -23,7 +23,7 @@ const location = {
 const App = () => {
   // verify users
   // const loggedIn = document.cookie.split(';').some((item) => item.trim().startsWith('token='));
-  const loggedIn = true;
+  const loggedIn = false;
 
   return (
     <div>
@@ -47,6 +47,9 @@ const App = () => {
           </Route>
           <Route exact path="/profile">
             <Profile />
+          </Route>
+          <Route exact path="/createAcc">
+            <CreateAccount />
           </Route>
         </Switch>
       </BrowserRouter>
