@@ -15,7 +15,6 @@ const Crawl = (props) => {
       >
         details
       </Link>
-      {/* <Link to={`detail/foo`}>My route</Link> */}
     </div>
   );
 };
