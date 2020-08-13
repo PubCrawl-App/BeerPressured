@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Crawl from './Crawl';
 import { data } from '../Mock';
+import NavBar from './NavBar';
 
 const Home = () => {
   const [crawlData, setCrawlData] = useState([]);
