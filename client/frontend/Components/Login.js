@@ -1,21 +1,56 @@
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
+import { NavLink, Redirect } from 'react-router-dom';
 import LoginButton from './LoginButton.js';
 import LogoutButton from './LogoutButton.js';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const userLogin = (e) => {
+    e.preventDefault();
+    const temp = {
+      email,
+      password,
+    };
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(temp),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('response from post', res);
+        setEmail('');
+        setPassword('');
+      });
+  };
+
   return (
     <div>
       <h1>SIGN IN TO PUBCRAWL</h1>
-      <form>
+      <form onSubmit={userLogin}>
         <p>Email: </p>
-        <input type="text" placeholder="Email" />
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <p>Password: </p>
-        <input type="text" placeholder="Password" />
-        <br></br>
+        <input
+          type="text"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <br />
         <input type="submit" value="Sign In" />
-        <br></br>
-        <input type="submit" value="Create Account" />
+        <br />
       </form>
+      <NavLink to="/createAcc"> CREATE ACCOUNT</NavLink>
       <p>Or Sign in with Google!</p>
       {/* <div className="g-signin2" data-onsuccess={this.onSignIn} /> */}
       {/* <div className='login-button'>

@@ -1,34 +1,29 @@
 import React, { useState } from 'react';
 import { userData, data } from '../Mock';
-import NavBar from './NavBar';
 
 const Profile = () => {
   const [val, setVal] = useState(userData.feeling);
+  const [name, setName] = useState('');
 
-  // fetch request for the userdata initial render and also list of crawls for userdata.id
-  const crawlArr = [];
-  for (const el of data) {
-    crawlArr.push(<p>{el.name}</p>);
-  }
-
-  const testing123 = (e) => {
-    setVal(e.target.value);
-    // post request to database to update userData with new feeling number
-  };
+  // useEffect(() => {
+  //   fetch('/users')
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       setCrawlData(res);
+  //       setInitialFetchData(res);
+  //     });
+  // }, []);
 
   return (
     <div>
-      <NavBar />
-      <h1>Name</h1>
+      <h1>Username</h1>
       <p>{userData.name}</p>
-      <h1>About Me</h1>
-      <p>{userData.aboutme}</p>
-      <div class="slidecontainer">
+      <div className="slidecontainer">
         <input
           type="range"
           min="1"
           max="10"
-          class="slider"
+          className="slider"
           id="myRange"
           value={val}
           onChange={testing123}

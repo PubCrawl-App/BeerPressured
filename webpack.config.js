@@ -1,19 +1,20 @@
-const path = require("path");
+const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: "./client/index.js",
+  entry: './client/index.js',
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "build"),
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'build'),
   },
   devServer: {
+    hot: true,
     port: 8080,
-    historyApiFallback: true, 
-    publicPath: "/build",
+    historyApiFallback: true,
+    publicPath: '/build/',
     proxy: {
-      '/': 'http://localhost:3000/'
+      '/': 'http://localhost:3000/',
     },
   },
   module: {
@@ -22,9 +23,9 @@ module.exports = {
         exclude: /node_modules/,
         test: /\.jsx?/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
@@ -36,16 +37,14 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
-          "style-loader",
+          'style-loader',
           // Translates CSS into CommonJS
-          "css-loader",
+          'css-loader',
           // Compiles Sass to CSS
-          "sass-loader",
+          'sass-loader',
         ],
       },
     ],
   },
-  plugins: [
-    new Dotenv()
-  ]
+  plugins: [new Dotenv()],
 };
