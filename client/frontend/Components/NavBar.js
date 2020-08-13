@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, BrowserRouter, Redirect } from 'react-router-dom';
 
-const NavBar = () => {
+const Navbar = () => {
   return (
     <div className="navbar-container">
       {/* <a className="nav-btn" href="/home">HOME</a>
@@ -16,4 +16,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;

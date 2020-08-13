@@ -9,6 +9,7 @@ import GoogleCoordinates from './GoogleCoordinates';
 import GoogleMap from './Map';
 import CreateAccount from './CreateAccount';
 import NavBar from './Navbar';
+import LoginButton from './LoginButton';
 
 //import './App.scss'
 const location = {
