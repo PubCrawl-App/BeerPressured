@@ -82,7 +82,7 @@ app.post(
   '/oauthUserAuth',
   userController.oauthCheck,
   userController.createOauthUser,
-  authController.setCookie,
+  authController.setAuthCookie,
   (req, res) => {
     return res.status(200).json(res.locals.user).redirect('/home');
   }

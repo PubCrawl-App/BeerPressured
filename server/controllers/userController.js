@@ -39,18 +39,27 @@ userController.createOauthUser = (req, res, next) => {
   if (res.locals.data === false) {
     db.query(createUserQuery)
       .then((data) => {
-        console.log('data.rows[0] ', data.rows[0]);
-        console.log('data.rows[0].id ', data.rows[0].id);
-        console.log('res.locals ', res.locals);
-        res.locals.id = data.rows[0].id;
-        return next();
+        // console.log('data.rows[0] ', data.rows[0]);
+        // console.log('data.rows[0].id ', data.rows[0].id);
+        // console.log('res.locals ', res.locals);
+        // console.log('123123123', data);
+        // res.locals.id = data.rows[0].id; //{id:48}
+        // // data.rows[0]  { id: 48 }
+        // // data.rows[0].id  48
+        // // res.locals  [Object: null prototype] { data: false }
+        // return next();
+        if (data.rows[0].id) {
+          res.locals.id = data.rows[0].id;
+          return next();
+        } else {
+          return next();
+        }
       })
       .catch((err) => {
         next({
           log: `error found in receiving data ${err}`,
         });
       });
-    return next();
   }
 };
 
@@ -62,10 +71,12 @@ userController.oauthCheck = (req, res, next) => {
   db.query(oauthQuery)
     .then((data) => {
       // throw new Error('theres no data')
-      // console.log('data.rows ', data.rows);
+      console.log('oauthCheck data.rows ', data.rows);
 
       //if the email doesn't exist, create new User
-      if (data.rows[0].id === undefined) {
+      if (!data.rows[0]) {
+        console.log('inside line 68');
+        console.log('data.rows[0]', data.rows[0]);
         res.locals.data = false;
         return next();
       }
@@ -73,7 +84,7 @@ userController.oauthCheck = (req, res, next) => {
       res.locals.data = true;
       console.log('data.rows ', data.rows);
       console.log('data.rows in verify', data.rows[0]);
-      res.locals = data.rows[0];
+      res.locals.id = data.rows[0];
       console.log('res.locals in oauth check', res.locals);
       return next();
     })
