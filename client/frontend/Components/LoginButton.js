@@ -34,8 +34,8 @@ const LoginButton = () => {
   });
 
   return (
-    <button onClick={signIn} className="button">
-      <img src="icons/google.svg" alt="google login" className="icon" />
+    <button onClick={signIn} class="g-signin2">
+      {/* <img src="icons/google.svg" alt="google login" className="icon" /> */}
       <span className="buttonText">Sign in with Google</span>
     </button>
   );

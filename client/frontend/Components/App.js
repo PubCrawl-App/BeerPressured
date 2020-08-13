@@ -30,7 +30,7 @@ const App = () => {
   const loggedIn = document.cookie.split(';').some((item) => item.trim().startsWith('key='));
 
   return (
-    <div>
+    <div id="background-image">
       {console.log('loggedIn', loggedIn)}
       <BrowserRouter>
         {loggedIn && <NavBar />}
