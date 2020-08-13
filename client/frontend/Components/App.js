@@ -10,6 +10,12 @@ import GoogleMap from './Map';
 import CreateAccount from './CreateAccount';
 import NavBar from './NavBar';
 
+const location = {
+  address: '1600 Amphitheatre Parkway, Mountain View, california.',
+  lat: 40.40615570000001,
+  lng: -74.4129016,
+};
+
 const App = () => {
   // verify users
   // const [loggedIn, setLoggedIn] = useState(
@@ -38,7 +44,8 @@ const App = () => {
             <Home />
           </Route>
           <Route exact path="/signin">
-            <Login />
+            {loggedIn ? <Redirect to="/home" /> : <Login />}
+            {/* <Login /> */}
           </Route>
           <Route exact path="/createCrawl">
             <CreateCrawl />
@@ -51,6 +58,9 @@ const App = () => {
           </Route>
           <Route exact path="/createAcc">
             <CreateAccount />
+          </Route>
+          <Route path="/detail">
+            <CrawlDetail />
           </Route>
         </Switch>
       </BrowserRouter>
