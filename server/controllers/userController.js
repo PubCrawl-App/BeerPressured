@@ -31,14 +31,14 @@ userController.createUser = (req, res, next) => {
     });
 };
 userController.createOauthUser = (req, res, next) => {
-  const { email } = req.body;
-  console.log('req body', req.body);
+  const { email, username } = req.body;
+  console.log("req body", req.body);
   //   const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}')`;
-  const createUserQuery = `INSERT INTO users (email, password, feeling) VALUES ('${email}', '0000', 5) RETURNING id`;
+  const createUserQuery = `INSERT INTO users (email, username, password, feeling) VALUES ('${email}','${username}', '0000', 5) RETURNING id`;
 
   if (res.locals.data === false) {
     db.query(createUserQuery)
-      .then((data) => {
+      .then(data => {
         // console.log('data.rows[0] ', data.rows[0]);
         // console.log('data.rows[0].id ', data.rows[0].id);
         // console.log('res.locals ', res.locals);
@@ -55,7 +55,7 @@ userController.createOauthUser = (req, res, next) => {
           return next();
         }
       })
-      .catch((err) => {
+      .catch(err => {
         next({
           log: `error found in receiving data ${err}`,
         });

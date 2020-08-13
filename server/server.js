@@ -76,6 +76,11 @@ app.get('/create', (req, res) => {
 app.post('/createCrawl', crawlsController.createCrawl, (req, res) => {
   return res.status(200).json(res.locals);
 });
+//GOOD
+app.post("/attendCrawl", crawlsController.attend, crawlsController.updateAttendees, (req, res) => {
+  return res.status(200).json(res.locals);
+});
+
 
 //
 app.post(

@@ -37,15 +37,12 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             {loggedIn ? <Redirect to="/home" /> : <Redirect to="/signin" />}
-            {/* {loggedIn && <Redirect to="/home" />} */}
-            {/* {!loggedIn && <Redirect to="/signin" />} */} */}
           </Route>
           <Route exact path="/home">
             <Home />
           </Route>
           <Route exact path="/signin">
-            {loggedIn ? <Redirect to="/home" /> : <Login />}
-            {/* <Login /> */}
+            <Login />
           </Route>
           <Route exact path="/createCrawl">
             <CreateCrawl />

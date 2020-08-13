@@ -84,4 +84,43 @@ crawlsController.createCrawl = (req, res, next) => {
     });
 };
 
+
+crawlsController.attend = (req, res, next) => {
+  let { crawls_id, users_id } = req.body;
+
+  console.log("crawls_id users_id", crawls_id, users_id);
+
+  const attendQuery = `INSERT INTO events (crawls_id, users_id) VALUES ('${crawls_id}', '${users_id}') RETURNING crawls_id;`;
+
+  db.query(attendQuery)
+    .then(data => {
+      res.locals = crawls_id;
+      console.log("res.locals in attendquery", res.locals);
+      return next();
+    })
+    .catch(err => {
+      next({
+        log: `error found in receiving data ${err}`,
+      });
+    });
+};
+
+crawlsController.updateAttendees = (req, res, next) => {
+  let { crawls_id } = req.body;
+  const updateQuery = `SELECT events.users_id, username FROM events LEFT JOIN users ON events.users_id = users.id WHERE events.crawls_id = '${crawls_id}';`;
+
+  db.query(updateQuery)
+    .then(data => {
+      res.locals.attendees = data.rows;
+      console.log("attendees in update attendess:", res.locals.attendees);
+      return next();
+    })
+    .catch(err => {
+      next({
+        log: `error found in receiving data ${err}`,
+      });
+    });
+};
+
+
 module.exports = crawlsController;
