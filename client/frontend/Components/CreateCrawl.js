@@ -9,20 +9,24 @@ const CreateCrawl = () => {
       <NavBar />
       <form>
         <label>Name: </label>
-        <input name='Name'></input><br></br>
+        <input name="Name"></input>
+        <br></br>
         <label>Summary: </label>
-        <input name='Summary'></input><br></br>
+        <input name="Summary"></input>
+        <br></br>
         <label>Schedule: </label>
-        <input name='Schedule'></input><br></br>
+        <input name="Schedule"></input>
+        <br></br>
         <label>Date/Time: </label>
-        <input name='time'></input><br></br>
+        <input name="time"></input>
+        <br></br>
         <label>Starting Location: </label>
-        <GoogleCoordinates /><br></br>
+        <GoogleCoordinates />
+        <br></br>
         <button>Create Crawl!</button>
       </form>
     </div>
-  )
-
-}
+  );
+};
 
 export default CreateCrawl;
