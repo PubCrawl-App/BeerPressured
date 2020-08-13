@@ -88,7 +88,7 @@ app.post('/createUser', userController.createUser, authController.setCookie, (re
 //GOOD
 app.post('/login', userController.verifyUser, authController.setCookie, (req, res) => {
   if (res.locals.data === true) {
-  return res.status(200).json(res.locals.user)
+    return res.status(200).json(res.locals.user)
   .redirect('/home');
   }
   return res.status(400).json(res.locals.data)
