@@ -1,9 +1,11 @@
 import React from 'react';
-import NavBar from './NavBar';
 import { data } from '../Mock';
 import Attendee from './Attendee';
+import { useHistory, withRouter } from 'react-router-dom';
 
-const CrawlDetail = () => {
+const CrawlDetail = (props) => {
+  const { crawlname, datetime, startinglocation } = props.location.state;
+  const history = useHistory();
   const attendees = [];
   for (const el of data) {
     attendees.push(<Attendee data={el} />);
@@ -11,8 +13,8 @@ const CrawlDetail = () => {
 
   return (
     <div>
-      <NavBar />
       <div>
+        <h1>{crawlname}</h1>
         <h1>Name</h1>
         <p>{data[0].name}</p>
       </div>
@@ -32,8 +34,9 @@ const CrawlDetail = () => {
         <option value="">List of Attendees</option>
         {attendees}
       </select>
+      <button onClick={() => history.goBack()}>Go back</button>
     </div>
   );
 };
 
-export default CrawlDetail;
+export default withRouter(CrawlDetail);

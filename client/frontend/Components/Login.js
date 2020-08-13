@@ -1,11 +1,12 @@
 import React, { useState, Component } from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import LoginButton from './LoginButton.js';
 import LogoutButton from './LogoutButton.js';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   const userLogin = (e) => {
     e.preventDefault();
@@ -25,6 +26,7 @@ const Login = () => {
         console.log('response from post', res);
         setEmail('');
         setPassword('');
+        location.reload();
       });
   };
 
