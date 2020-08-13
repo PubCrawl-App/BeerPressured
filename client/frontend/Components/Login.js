@@ -28,14 +28,13 @@ const Login = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(temp),
-    }).then(() => {
-      setEmail('');
-      setPassword('');
-    });
-    // .then((res) => res.json())
-    // .then((res) => {
-    //   console.log('response from post', res);
-    // });
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('response from post', res);
+        setEmail('');
+        setPassword('');
+      });
   };
 
   return (
