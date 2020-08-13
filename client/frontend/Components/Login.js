@@ -28,8 +28,8 @@ const Login = () => {
   };
 
   return (
-    <div id='login-background'>
-      <h1>BEER PRESSURE</h1>
+    <div id="login-background">
+      <h1 id="beer-pressure">BEER PRESSURE</h1>
       <div className="loginBox">
         <form className="loginForm" onSubmit={userLogin}>
           <p>Email: </p>
@@ -51,7 +51,7 @@ const Login = () => {
           <br />
         </form>
         <NavLink to="/createAcc"> CREATE ACCOUNT</NavLink>
-        <p>Or Sign in with Google!</p>
+        <p id="google-sign-in-p">Or Sign in with Google!</p>
         <LoginButton />
       </div>
       {/* <LogoutButton /> */}

@@ -33,7 +33,7 @@ const CreateCrawl = () => {
 
   return (
     <div>
-      <form onSubmit={addEvent}>
+      <form onSubmit={addEvent} className="createcrawl-form">
         <label>Name:</label>
         <input name="Name" value={name} onChange={(e) => setName(e.target.value)} />
         <br />

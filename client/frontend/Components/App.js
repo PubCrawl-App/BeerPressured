@@ -42,7 +42,8 @@ const App = () => {
             <Home />
           </Route>
           <Route exact path="/signin">
-            <Login />
+            {loggedIn ? <Redirect to="/home" /> : <Login />}
+            {/* <Login /> */}
           </Route>
           <Route exact path="/createCrawl">
             <CreateCrawl />
