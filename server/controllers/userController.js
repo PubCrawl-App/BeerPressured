@@ -14,10 +14,11 @@ userController.createUser = (req, res, next) => {
   let { email, username, password } = req.body;
   console.log('req body', req.body);
   //   const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}')`;
-  const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}')`;
+  const createUserQuery = `INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}') RETURNING id`;
 
   db.query(createUserQuery)
     .then((data) => {
+      res.locals.user = data.rows;
       return next();
     })
     .catch((err) => {
@@ -37,8 +38,10 @@ userController.verifyUser = (req, res, next) => {
       // throw new Error('theres no data')
       if (!data.rows.length) {
         res.locals.data = false;
+
         //return next(new Error('error: no user found'));
       }
+      res.locals.data = true;
       res.locals.user = data.rows;
       console.log('data.rows in verify', data.rows);
       return next();
@@ -53,12 +56,12 @@ userController.verifyUser = (req, res, next) => {
 userController.getProfile = (req, res, next) => {
   let { users_id } = req.params;
   console.log('params: ', req.params);
-  const profileQuery = `SELECT feeling FROM users WHERE id = '${users_id}'`;
+  const profileQuery = `SELECT * FROM users WHERE id = '${users_id}'`;
 
   db.query(profileQuery)
     .then((data) => {
       console.log('data.rows ', data.rows);
-      res.locals.feeling = data.rows;
+      res.locals.user = data.rows;
       return next();
     })
     .catch((err) => {
