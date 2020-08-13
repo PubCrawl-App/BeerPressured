@@ -7,7 +7,19 @@ authController.setCookie = (req, res, next) => {
   console.log('res.locals.data ', res.locals.data);
   console.log('res.locals', res.locals);
   //if (res.locals.data === undefined) {
-  res.cookie('key', id, { expires: new Date(Date.now() + 900000) });
+  res.cookie('key', id, { expires: new Date(Date.now() + 9000000) });
+  // }
+  return next();
+};
+authController.setAuthCookie = (req, res, next) => {
+  console.log('req.body in authcookie', req.body);
+  const { id } = res.locals;
+  console.log('id in authcookie:', id);
+
+  console.log('res.locals.data ', res.locals.data);
+  console.log('res.locals', res.locals);
+  //if (res.locals.data === undefined) {
+  res.cookie('key', id, { expires: new Date(Date.now() + 9000000) });
   // }
   return next();
 };
