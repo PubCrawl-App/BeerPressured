@@ -4,7 +4,6 @@ const path = require('path');
 const userController = require('./controllers/userController.js');
 const crawlsController = require('./controllers/crawlsController.js');
 const authController = require('./controllers/authController.js');
-const loginRouter = require('./loginRouter');
 const cookieParser = require('cookie-parser');
 const { OAuth2Client } = require('google-auth-library');
 
