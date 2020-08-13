@@ -30,22 +30,19 @@ const App = () => {
   const loggedIn = document.cookie.split(';').some((item) => item.trim().startsWith('key='));
 
   return (
-    <div>
+    <div id="background-image">
       {console.log('loggedIn', loggedIn)}
       <BrowserRouter>
         {loggedIn && <NavBar />}
         <Switch>
           <Route exact path="/">
             {loggedIn ? <Redirect to="/home" /> : <Redirect to="/signin" />}
-            {/* {loggedIn && <Redirect to="/home" />} */}
-            {/* {!loggedIn && <Redirect to="/signin" />} */} */}
           </Route>
           <Route exact path="/home">
             <Home />
           </Route>
           <Route exact path="/signin">
-            {loggedIn ? <Redirect to="/home" /> : <Login />}
-            {/* <Login /> */}
+            <Login />
           </Route>
           <Route exact path="/createCrawl">
             <CreateCrawl />

@@ -11,6 +11,12 @@ const CrawlDetail = (props) => {
   const [loaded, setLoaded] = useState(false);
   // let attendees;
 
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
   useEffect(() => {
     fetch('/crawls/' + id)
       .then((res) => res.json())
@@ -20,6 +26,30 @@ const CrawlDetail = (props) => {
         setLoaded(true);
       });
   }, []);
+
+  const addUser = () => {
+    const users_id = getCookie('key');
+    console.log('crawls_id:', crawlDetail.userCrawls[0].crawls_id);
+    console.log('users_id:', users_id);
+    fetch('/attendCrawl', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ crawls_id: crawlDetail.userCrawls[0].crawls_id, users_id: users_id }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log('response from post:', res);
+        fetch('/crawls/' + id)
+          .then((res) => res.json())
+          .then((res) => {
+            console.log('res crawl detail: ', res);
+            setCrawlDetail(res);
+            setLoaded(true);
+          });
+      });
+  };
 
   return (
     <div>
@@ -49,6 +79,7 @@ const CrawlDetail = (props) => {
               <option value={el.username}>{el.username}</option>
             ))}
           </select>
+          <button onClick={addUser}>Attend Crawl</button>
           <button onClick={() => history.goBack()}>Go back</button>
         </div>
       )}

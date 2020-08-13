@@ -1,26 +1,30 @@
 /* eslint-disable react/button-has-type */
-import React from 'react';
-import { useGoogleLogin } from 'react-google-login';
+import React from "react";
+import { useGoogleLogin } from "react-google-login";
 
-const clientId = '1056890442611-8hj0b6phoo8k6kpd0a532gc1f63sq4eo.apps.googleusercontent.com';
+const clientId = "1056890442611-8hj0b6phoo8k6kpd0a532gc1f63sq4eo.apps.googleusercontent.com";
 
 const LoginButton = () => {
-  const onSuccess = (res) => {
-    console.log('login success', res.profileObj);
-    console.log('email', res.profileObj.email);
-    fetch('/oauthUserAuth', {
-      method: 'POST',
+  const onSuccess = res => {
+    console.log("login success", res.profileObj);
+    console.log("email", res.profileObj.email);
+    fetch("/oauthUserAuth", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: res.profileObj.email, password: '0000' }),
+      body: JSON.stringify({
+        email: res.profileObj.email,
+        username: res.profileObj.givenName,
+        password: "0000",
+      }),
     }).then(() => {
       location.reload();
     });
   };
 
-  const onFailure = (res) => {
-    console.log('login fauilure', res);
+  const onFailure = res => {
+    console.log("login fauilure", res);
   };
 
   const { signIn } = useGoogleLogin({
@@ -28,14 +32,14 @@ const LoginButton = () => {
     onFailure,
     clientId,
     isSignedIn: true,
-    accessType: 'offline',
+    accessType: "offline",
     // responseType: 'code',
     // prompt: 'consent',
   });
 
   return (
-    <button onClick={signIn} className="button">
-      <img src="icons/google.svg" alt="google login" className="icon" />
+    <button onClick={signIn} className="g-signin2">
+      {/* <img src="icons/google.svg" alt="google login" className="icon" /> */}
       <span className="buttonText">Sign in with Google</span>
     </button>
   );
