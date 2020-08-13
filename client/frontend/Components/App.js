@@ -10,16 +10,6 @@ import GoogleMap from './Map';
 import CreateAccount from './CreateAccount';
 import NavBar from './NavBar';
 
-const location = {
-  address: 'Death & Company',
-  lat: 40.72592,
-  lng: -73.9846452,
-};
-
-// const deathAndCompany = {
-//   address: '433 E 6th St, New York, NY 10009',
-// }
-
 const App = () => {
   // verify users
   // const [loggedIn, setLoggedIn] = useState(

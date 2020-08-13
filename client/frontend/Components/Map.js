@@ -20,14 +20,7 @@ const GoogleMap = ({ location }) => (
   <div className="map">
     <h2 className="map-h2">Location of Bar Crawl</h2>
 
-<<<<<<< HEAD
     <div className="google-map" id='google-map-me'>
-=======
-    <div
-      className="google-map"
-      style={{ display: 'flex', alignItems: 'center', height: '50vh', width: '50%' }}
-    >
->>>>>>> 5fedc8841fba74d49517ba3e49c57bb76acd1749
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.API_KEY }}
         defaultCenter={location}

@@ -4,7 +4,6 @@ const path = require('path');
 const userController = require('./controllers/userController.js');
 const crawlsController = require('./controllers/crawlsController.js');
 const authController = require('./controllers/authController.js');
-const loginRouter = require('./loginRouter');
 const cookieParser = require('cookie-parser');
 const { OAuth2Client } = require('google-auth-library');
 
@@ -90,6 +89,7 @@ app.post('/login', userController.verifyUser, authController.setCookie, (req, re
   }
   return res.status(400).json(res.locals.data);
   // .redirect('/createUser');
+  res.status(200).redirect('/');
 });
 
 //good

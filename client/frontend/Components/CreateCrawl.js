@@ -33,7 +33,6 @@ const CreateCrawl = () => {
 
   return (
     <div>
-<<<<<<< HEAD
       <form onSubmit={addEvent}>
         <label>Name:</label>
         <input name="Name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -51,26 +50,6 @@ const CreateCrawl = () => {
         <GoogleCoordinates setPlace={setPlace} />
         <br />
         <input type="submit" value="Create A New Crawl" />
-=======
-      <NavBar />
-      <form>
-        <label>Name: </label>
-        <input name="Name"></input>
-        <br></br>
-        <label>Summary: </label>
-        <input name="Summary"></input>
-        <br></br>
-        <label>Schedule: </label>
-        <input name="Schedule"></input>
-        <br></br>
-        <label>Date/Time: </label>
-        <input name="time"></input>
-        <br></br>
-        <label>Starting Location: </label>
-        <GoogleCoordinates />
-        <br></br>
-        <button>Create Crawl!</button>
->>>>>>> 5fedc8841fba74d49517ba3e49c57bb76acd1749
       </form>
     </div>
   );
