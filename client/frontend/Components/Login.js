@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,15 +22,20 @@ const Login = () => {
       email,
       password,
     };
-    fetch('/login', {
+    fetch('/login/verify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(temp),
-    })
-      .then((res) => res.json())
-      .then((res) => console.log('response from post', res));
+    }).then(() => {
+      setEmail('');
+      setPassword('');
+    });
+    // .then((res) => res.json())
+    // .then((res) => {
+    //   console.log('response from post', res);
+    // });
   };
 
   return (

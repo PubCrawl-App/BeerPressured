@@ -38,6 +38,7 @@ userController.verifyUser = (req, res, next) => {
       // throw new Error('theres no data')
       if (!data.rows.length) {
         res.locals.data = false;
+
         //return next(new Error('error: no user found'));
       }
       res.locals.data = true;
