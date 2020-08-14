@@ -40,7 +40,7 @@ const CreateCrawl = () => {
         <label>Summary: </label>
         <input name="Summary" value={summary} onChange={(e) => setSummary(e.target.value)} />
         <br />
-        <label>Schedule: </label>
+        <label>Schedule/Description: </label>
         <input name="Schedule" value={schedule} onChange={(e) => setSchedule(e.target.value)} />
         <br />
         <label>Date/Time: </label>
