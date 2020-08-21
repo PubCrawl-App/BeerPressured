@@ -7,7 +7,7 @@ const GoogleCoordinates = (props) => {
   // const [place, setPlace] = useState(null);
   const { setPlace } = props;
   return (
-    <div>
+    <div id="googlecoords-div">
       {/* {console.log('state', props.place)} */}
       <GoogleComponent
         apiKey={API_KEY}

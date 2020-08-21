@@ -12,7 +12,7 @@ module.exports = {
     hot: true,
     port: 8080,
     historyApiFallback: true,
-    publicPath: '/build/',
+    publicPath: 'http://localhost:8080/build',
     proxy: {
       '/': 'http://localhost:3000/',
     },

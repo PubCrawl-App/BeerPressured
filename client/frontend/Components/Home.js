@@ -37,6 +37,7 @@ const Home = () => {
           onChange={(e) => setSearch(e.target.value)}
           value={search}
           placeholder="Crawl Search"
+          id="crawl-search"
         />
         <input type="submit" value="Search" />
       </form>

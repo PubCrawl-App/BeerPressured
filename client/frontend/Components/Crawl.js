@@ -10,9 +10,7 @@ const Crawl = (props) => {
       <p>{crawlname}</p>
       <p>{datetime}</p>
       <p>{startinglocation}</p>
-      <Link
-        to={{ pathname: '/detail/' + crawlname + id, state: { id } }}
-      >
+      <Link to={{ pathname: '/detail/' + crawlname + id, state: { id } }} id="details-tag">
         details
       </Link>
     </div>

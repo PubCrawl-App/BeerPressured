@@ -12,8 +12,8 @@ import NavBar from './NavBar';
 
 const location = {
   address: '1600 Amphitheatre Parkway, Mountain View, california.',
-  lat: 40.40615570000001,
-  lng: -74.4129016,
+  lat: 40.7183956,
+  lng: -74.0033487,
 };
 
 const App = () => {
@@ -42,7 +42,8 @@ const App = () => {
             <Home />
           </Route>
           <Route exact path="/signin">
-            <Login />
+            {loggedIn ? <Redirect to="/home" /> : <Login />}
+            {/* <Login /> */}
           </Route>
           <Route exact path="/createCrawl">
             <CreateCrawl />
